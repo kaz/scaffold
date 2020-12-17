@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../stores";
 import { updateBtcAmount } from "../stores/exchange";
@@ -43,4 +43,4 @@ const Component = ({ target }: Props) => {
 		</React.Fragment>
 	);
 };
-export default Component;
+export default React.memo(Component);
