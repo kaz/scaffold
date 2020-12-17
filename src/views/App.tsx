@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { HashRouter, Link, Route, Switch } from "react-router-dom";
+import Converter from "../components/Converter";
 import logo from "../../public/logo.svg";
 import "../App.css";
 
@@ -13,17 +15,29 @@ const Component = () => {
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<p>
-					Page has been open for <code>{count}</code> seconds.
-				</p>
-				<p>
-					<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-						Learn React
-					</a>
-				</p>
+				<HashRouter>
+					<p>
+						Page has been open for <code>{count}</code> seconds.
+					</p>
+					<p>
+						<Link className="App-link" to="/usd">
+							BTC/USD
+						</Link>{" "}
+						<Link className="App-link" to="/jpy">
+							BTC/JPY
+						</Link>
+					</p>
+					<p>
+						<Switch>
+							<Route exact path="/usd">
+								<Converter symbol="USD" rate={22657.39} />
+							</Route>
+							<Route exact path="/jpy">
+								<Converter symbol="JPY" rate={2333372.15} />
+							</Route>
+						</Switch>
+					</p>
+				</HashRouter>
 			</header>
 		</div>
 	);
