@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../stores";
+import { updateBtcAmount } from "../stores/exchange";
 import styled from "@emotion/styled";
 import * as mixins from "../styles/mixins";
 
@@ -14,20 +17,18 @@ const Input = styled.input({
 });
 
 type Props = {
-	symbol: string;
-	rate: number;
+	target: string;
 };
-const Component = (props: Props) => {
-	const [btc, setBtc] = useState(0);
-	const [fiat, setFiat] = useState(0);
+const Component = ({ target }: Props) => {
+	const btc = useSelector(state => state.exchange.btcAmount);
+	const rate = useSelector(state => state.exchange.rates[target]);
 
+	const dispatch = useAppDispatch();
 	const inBtc = (amount: number) => {
-		setBtc(amount);
-		setFiat(amount * props.rate);
+		dispatch(updateBtcAmount(amount));
 	};
 	const inFiat = (amount: number) => {
-		setBtc(amount / props.rate);
-		setFiat(amount);
+		dispatch(updateBtcAmount(amount / rate));
 	};
 
 	return (
@@ -37,7 +38,7 @@ const Component = (props: Props) => {
 			</Label>
 			⇄
 			<Label>
-				<Input type="number" value={fiat} onChange={e => inFiat(parseFloat(e.target.value))} /> {props.symbol}
+				<Input type="number" value={btc * rate} onChange={e => inFiat(parseFloat(e.target.value))} /> {target}
 			</Label>
 		</React.Fragment>
 	);

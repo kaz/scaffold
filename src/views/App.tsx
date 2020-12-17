@@ -62,10 +62,10 @@ const Component = () => {
 					<Paragraph>
 						<Switch>
 							<Route exact path="/usd">
-								<Converter symbol="USD" rate={22657.39} />
+								<Converter target="USD" />
 							</Route>
 							<Route exact path="/jpy">
-								<Converter symbol="JPY" rate={2333372.15} />
+								<Converter target="JPY" />
 							</Route>
 						</Switch>
 					</Paragraph>
