@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import store from "./stores";
 import { syncRates } from "./stores/exchange";
-import App from "./views/App";
 import GlobalStyle from "./styles/index";
-import { Provider } from "react-redux";
+import App from "./views/App";
 
 store.dispatch(syncRates());
 

@@ -1,10 +1,9 @@
-import logo from "../../public/logo.svg";
-
+import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Switch, Link as _Link } from "react-router-dom";
-import styled from "@emotion/styled";
-import * as mixins from "../styles/mixins";
+import logo from "../../public/logo.svg";
 import Converter from "../components/Converter";
+import * as mixins from "../styles/mixins";
 
 const Container = styled.div({
 	textAlign: "center",

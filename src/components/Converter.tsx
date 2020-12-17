@@ -1,8 +1,8 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../stores";
 import { updateBtcAmount } from "../stores/exchange";
-import styled from "@emotion/styled";
 import * as mixins from "../styles/mixins";
 
 const Label = styled.label(mixins.labelLike);
