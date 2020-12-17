@@ -1,8 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter, Link, Route, Switch } from "react-router-dom";
-import Converter from "../components/Converter";
 import logo from "../../public/logo.svg";
-import "../App.css";
+
+import React, { useState, useEffect } from "react";
+import { HashRouter, Route, Switch, Link as _Link } from "react-router-dom";
+import { keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
+import Converter from "../components/Converter";
+
+const logoSpin = keyframes({
+	from: {
+		transform: "rotate(0deg)",
+	},
+	to: {
+		transform: "rotate(360deg)",
+	},
+});
+
+const Container = styled.div({
+	textAlign: "center",
+});
+const Header = styled.header({
+	backgroundColor: "#282c34",
+	minHeight: "100vh",
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "center",
+	fontSize: "calc(10px + 2vmin)",
+	color: "white",
+});
+const Logo = styled.img({
+	height: "40vmin",
+	pointerEvents: "none",
+	"@media (prefers-reduced-motion: no-preference)": {
+		"&": {
+			animation: `${logoSpin} infinite 20s linear`,
+		},
+	},
+});
+const Paragraph = styled.p({
+	margin: "0.4rem",
+});
+const Code = styled.code({
+	background: "#fff3",
+	padding: "4px 8px",
+	borderRadius: "4px",
+});
+const Link = styled(_Link)({
+	color: "#61dafb",
+});
 
 const Component = () => {
 	const [count, setCount] = useState(0);
@@ -12,22 +57,22 @@ const Component = () => {
 	});
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
+		<Container>
+			<Header>
+				<Logo src={logo} alt="logo" />
 				<HashRouter>
-					<p>
-						Page has been open for <code>{count}</code> seconds.
-					</p>
-					<p>
+					<Paragraph>
+						Page has been open for <Code>{count}</Code> seconds.
+					</Paragraph>
+					<Paragraph>
 						<Link className="App-link" to="/usd">
 							BTC/USD
 						</Link>{" "}
 						<Link className="App-link" to="/jpy">
 							BTC/JPY
 						</Link>
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						<Switch>
 							<Route exact path="/usd">
 								<Converter symbol="USD" rate={22657.39} />
@@ -36,10 +81,10 @@ const Component = () => {
 								<Converter symbol="JPY" rate={2333372.15} />
 							</Route>
 						</Switch>
-					</p>
+					</Paragraph>
 				</HashRouter>
-			</header>
-		</div>
+			</Header>
+		</Container>
 	);
 };
 export default Component;

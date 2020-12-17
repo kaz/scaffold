@@ -4,6 +4,8 @@
 		"build": "snowpack build"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.1.2",
+		"@emotion/styled": "^11.0.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-router-dom": "^5.2.0"
