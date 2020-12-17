@@ -8,9 +8,6 @@ const styles = css({
 		WebkitFontSmoothing: "antialiased",
 		MozOsxFontSmoothing: "grayscale",
 	},
-	code: {
-		fontFamily: `source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace`,
-	},
 });
 
 const Component = () => {

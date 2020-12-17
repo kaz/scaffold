@@ -2,18 +2,9 @@ import logo from "../../public/logo.svg";
 
 import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Switch, Link as _Link } from "react-router-dom";
-import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import * as mixins from "../styles/mixins";
 import Converter from "../components/Converter";
-
-const logoSpin = keyframes({
-	from: {
-		transform: "rotate(0deg)",
-	},
-	to: {
-		transform: "rotate(360deg)",
-	},
-});
 
 const Container = styled.div({
 	textAlign: "center",
@@ -33,18 +24,14 @@ const Logo = styled.img({
 	pointerEvents: "none",
 	"@media (prefers-reduced-motion: no-preference)": {
 		"&": {
-			animation: `${logoSpin} infinite 20s linear`,
+			animation: `${mixins.logoSpin} infinite 20s linear`,
 		},
 	},
 });
 const Paragraph = styled.p({
 	margin: "0.4rem",
 });
-const Code = styled.code({
-	background: "#fff3",
-	padding: "4px 8px",
-	borderRadius: "4px",
-});
+const Code = styled.code(mixins.labelLike);
 const Link = styled(_Link)({
 	color: "#61dafb",
 });
