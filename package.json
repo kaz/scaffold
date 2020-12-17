@@ -1,26 +1,19 @@
 {
 	"scripts": {
-		"start": "webpack serve",
-		"build": "webpack"
+		"start": "snowpack dev",
+		"build": "snowpack build"
 	},
 	"dependencies": {
-		"@types/react": "^17.0.0",
-		"@types/react-dom": "^17.0.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1"
 	},
 	"devDependencies": {
-		"@types/webpack": "^4.41.25",
-		"css-loader": "^5.0.1",
-		"file-loader": "^6.2.0",
-		"html-webpack-plugin": "^4.5.0",
-		"sass": "^1.30.0",
-		"sass-loader": "^10.1.0",
-		"style-loader": "^2.0.0",
-		"ts-loader": "^8.0.11",
-		"ts-node": "^9.1.1",
-		"webpack": "^4.44.2",
-		"webpack-cli": "^4.2.0",
-		"webpack-dev-server": "^3.11.0"
+		"@snowpack/plugin-react-refresh": "^2.3.9",
+		"@snowpack/plugin-typescript": "^1.1.1",
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
+		"@types/snowpack-env": "^2.3.2",
+		"snowpack": "^2.18.4",
+		"typescript": "^4.1.3"
 	}
 }
