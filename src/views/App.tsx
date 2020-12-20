@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HashRouter, Link as _Link, Route, Switch } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import logo from "../../public/logo.svg";
+import Clock from "../components/Clock";
 import Converter from "../components/Converter";
 import * as mixins from "../styles/mixins";
 
@@ -31,25 +32,18 @@ const Logo = styled.img({
 const Paragraph = styled.p({
 	margin: "0.4rem",
 });
-const Code = styled.code(mixins.labelLike);
 const Link = styled(_Link)({
 	color: "#61dafb",
 });
 
 const Component = () => {
-	const [count, setCount] = useState(0);
-	useEffect(() => {
-		const timer = setTimeout(() => setCount(count + 1), 1000);
-		return () => clearTimeout(timer);
-	});
-
 	return (
 		<Container>
 			<Header>
 				<Logo src={logo} alt="logo" />
 				<HashRouter>
 					<Paragraph>
-						Page has been open for <Code>{count}</Code> seconds.
+						<Clock />
 					</Paragraph>
 					<Paragraph>
 						<Link className="App-link" to="/usd">
