@@ -5,7 +5,6 @@
 		"target": "esnext",
 		"moduleResolution": "node",
 		"jsx": "preserve",
-		"baseUrl": "./",
 		"paths": {},
 		"noEmit": true,
 		"strict": true,
