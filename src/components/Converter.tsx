@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../stores";
-import { updateBtcAmount } from "../stores/exchange";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { btcAmount, exchangeRate } from "../atoms/exchange";
 import * as mixins from "../styles/mixins";
 
 const Label = styled.label(mixins.labelLike);
@@ -20,25 +19,17 @@ type Props = {
 	target: string;
 };
 const Component = ({ target }: Props) => {
-	const btc = useSelector(state => state.exchange.btcAmount);
-	const rate = useSelector(state => state.exchange.rates[target]);
-
-	const dispatch = useAppDispatch();
-	const inBtc = (amount: number) => {
-		dispatch(updateBtcAmount(amount));
-	};
-	const inFiat = (amount: number) => {
-		dispatch(updateBtcAmount(amount / rate));
-	};
+	const [btc, setBtc] = useRecoilState(btcAmount);
+	const rate = useRecoilValue(exchangeRate(target));
 
 	return (
 		<React.Fragment>
 			<Label>
-				<Input type="number" value={btc} onChange={e => inBtc(parseFloat(e.target.value))} /> BTC
+				<Input type="number" value={btc} onChange={e => setBtc(parseFloat(e.target.value))} /> BTC
 			</Label>
 			⇄
 			<Label>
-				<Input type="number" value={btc * rate} onChange={e => inFiat(parseFloat(e.target.value))} /> {target}
+				<Input type="number" value={btc * rate} onChange={e => setBtc(parseFloat(e.target.value) / rate)} /> {target}
 			</Label>
 		</React.Fragment>
 	);
