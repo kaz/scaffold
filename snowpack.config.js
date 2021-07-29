@@ -12,6 +12,9 @@ module.exports = {
 	devOptions: {
 		open: "none",
 	},
+	buildOptions: {
+		baseUrl: ".",
+	},
 	optimize: {
 		bundle: true,
 		minify: true,
