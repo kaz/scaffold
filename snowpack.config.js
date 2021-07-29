@@ -4,7 +4,11 @@ module.exports = {
 		public: { url: "/", static: true },
 		src: { url: "/dist" },
 	},
-	plugins: ["@snowpack/plugin-react-refresh", "@snowpack/plugin-typescript"],
+	plugins: [
+		"@snowpack/plugin-react-refresh",
+		"@snowpack/plugin-typescript",
+		"./snowpack-config-resolveProxyImports-plugin.js",
+	],
 	devOptions: {
 		open: "none",
 	},
