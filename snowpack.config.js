@@ -19,5 +19,6 @@ module.exports = {
 		bundle: true,
 		minify: true,
 		treeshake: true,
+		sourcemap: false,
 	},
 };
