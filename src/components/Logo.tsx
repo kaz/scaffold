@@ -1,7 +1,7 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
-import logo from "../../public/logo.svg";
+import logo from "../../assets/logo.svg";
 
 const logoSpin = keyframes({
 	from: {
