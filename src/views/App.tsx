@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { HashRouter, Link as _Link, Route, Switch } from "react-router-dom";
+import { HashRouter, Link as _Link, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import Clock from "../components/Clock";
 import Converter from "../components/Converter";
@@ -46,14 +46,10 @@ const Component = () => {
 					<Paragraph>
 						<RecoilRoot>
 							<React.Suspense fallback="Loading ...">
-								<Switch>
-									<Route exact path="/usd">
-										<Converter target="USD" />
-									</Route>
-									<Route exact path="/jpy">
-										<Converter target="JPY" />
-									</Route>
-								</Switch>
+								<Routes>
+									<Route path="/usd" element={<Converter target="USD" />} />
+									<Route path="/jpy" element={<Converter target="JPY" />} />
+								</Routes>
 							</React.Suspense>
 						</RecoilRoot>
 					</Paragraph>
