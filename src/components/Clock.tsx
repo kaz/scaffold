@@ -1,8 +1,5 @@
-import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import * as mixins from "../styles/mixins";
-
-const Code = styled.code(mixins.labelLike);
+import css from "./Clock.module.scss";
 
 const Component = () => {
 	const [count, setCount] = useState(0);
@@ -13,7 +10,7 @@ const Component = () => {
 
 	return (
 		<React.Fragment>
-			Page has been open for <Code>{count}</Code> seconds.
+			Page has been open for <code className={css.time}>{count}</code> seconds.
 		</React.Fragment>
 	);
 };

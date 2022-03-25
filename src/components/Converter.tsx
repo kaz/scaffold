@@ -1,19 +1,7 @@
-import styled from "@emotion/styled";
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { btcAmount, exchangeRate } from "../atoms/exchange";
-import * as mixins from "../styles/mixins";
-
-const Label = styled.label(mixins.labelLike);
-const Input = styled.input({
-	border: "none",
-	background: "none",
-	color: "inherit",
-	fontSize: "inherit",
-	fontFamily: "inherit",
-	appearance: "textfield",
-	width: "15vw",
-});
+import css from "./Converter.module.scss";
 
 type Props = {
 	target: string;
@@ -24,13 +12,19 @@ const Component = ({ target }: Props) => {
 
 	return (
 		<React.Fragment>
-			<Label>
-				<Input type="number" value={btc} onChange={e => setBtc(parseFloat(e.target.value))} /> BTC
-			</Label>
+			<label className={css.label}>
+				<input className={css.price} type="number" value={btc} onChange={e => setBtc(parseFloat(e.target.value))} /> BTC
+			</label>
 			⇄
-			<Label>
-				<Input type="number" value={btc * rate} onChange={e => setBtc(parseFloat(e.target.value) / rate)} /> {target}
-			</Label>
+			<label className={css.label}>
+				<input
+					className={css.price}
+					type="number"
+					value={btc * rate}
+					onChange={e => setBtc(parseFloat(e.target.value) / rate)}
+				/>{" "}
+				{target}
+			</label>
 		</React.Fragment>
 	);
 };

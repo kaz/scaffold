@@ -1,0 +1,14 @@
+@import "../styles/mixins.scss";
+
+.label {
+	@include labelLike;
+}
+.price {
+	border: none;
+	background: none;
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	appearance: textfield;
+	width: 15vw;
+}

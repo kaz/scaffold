@@ -1,49 +1,36 @@
-import styled from "@emotion/styled";
 import React from "react";
-import { HashRouter, Link as _Link, Route, Routes } from "react-router-dom";
+import { HashRouter, Link, Route, Routes } from "react-router-dom";
 import Clock from "../components/Clock";
 import Converter from "../components/Converter";
 import Logo from "../components/Logo";
-
-const Container = styled.div({
-	textAlign: "center",
-	backgroundColor: "#282c34",
-	minHeight: "100vh",
-	display: "flex",
-	flexDirection: "column",
-	alignItems: "center",
-	justifyContent: "center",
-	fontSize: "calc(10px + 2vmin)",
-	color: "white",
-});
-const Paragraph = styled.p({
-	margin: "0.5rem",
-});
-const Link = styled(_Link)({
-	color: "#61dafb",
-});
+import css from "./App.module.scss";
 
 const Component = () => {
 	return (
-		<Container>
+		<section className={css.component}>
 			<Logo />
 			<HashRouter>
-				<Paragraph>
+				<div className={css.block}>
 					<Clock />
-				</Paragraph>
-				<Paragraph>
-					<Link to="/usd">BTC/USD</Link> <Link to="/jpy">BTC/JPY</Link>
-				</Paragraph>
-				<Paragraph>
+				</div>
+				<div className={css.block}>
+					<Link className={css.link} to="/usd">
+						BTC/USD
+					</Link>{" "}
+					<Link className={css.link} to="/jpy">
+						BTC/JPY
+					</Link>
+				</div>
+				<div className={css.block}>
 					<React.Suspense fallback="Loading ...">
 						<Routes>
 							<Route path="/usd" element={<Converter target="USD" />} />
 							<Route path="/jpy" element={<Converter target="JPY" />} />
 						</Routes>
 					</React.Suspense>
-				</Paragraph>
+				</div>
 			</HashRouter>
-		</Container>
+		</section>
 	);
 };
 export default Component;

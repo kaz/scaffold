@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
-import GlobalStyle from "./styles/index";
+import "./styles/global.scss";
 import App from "./views/App";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<GlobalStyle />
 		<RecoilRoot>
 			<App />
 		</RecoilRoot>
