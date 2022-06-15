@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { btcAmount, exchangeRate } from "../atoms/exchange";
 import css from "./Converter.module.scss";
@@ -6,26 +6,39 @@ import css from "./Converter.module.scss";
 type Props = {
 	target: string;
 };
-const Component = ({ target }: Props) => {
+const Converter = ({ target }: Props) => {
 	const [btc, setBtc] = useRecoilState(btcAmount);
 	const rate = useRecoilValue(exchangeRate(target));
 
+	const applyBtcAmount = (amount: number) => {
+		if (!isNaN(amount)) {
+			setBtc(amount);
+		}
+	};
+
 	return (
-		<React.Fragment>
+		<div>
 			<label className={css.label}>
-				<input className={css.price} type="number" value={btc} onChange={e => setBtc(parseFloat(e.target.value))} /> BTC
+				<input
+					className={css.price}
+					type="text"
+					value={btc.toFixed(2)}
+					onChange={e => applyBtcAmount(parseFloat(e.target.value))}
+				/>{" "}
+				BTC
 			</label>
 			⇄
 			<label className={css.label}>
 				<input
 					className={css.price}
-					type="number"
-					value={btc * rate}
-					onChange={e => setBtc(parseFloat(e.target.value) / rate)}
+					type="text"
+					value={(btc * rate).toFixed(2)}
+					onChange={e => applyBtcAmount(parseFloat(e.target.value) / rate)}
 				/>{" "}
 				{target}
 			</label>
-		</React.Fragment>
+		</div>
 	);
 };
-export default React.memo(Component);
+
+export default memo(Converter);

@@ -4,11 +4,13 @@
 	@include labelLike;
 }
 .price {
-	border: none;
-	background: none;
+	width: 15vw;
+
 	color: inherit;
 	font-size: inherit;
 	font-family: inherit;
-	appearance: textfield;
-	width: 15vw;
+
+	border: none;
+	outline: none;
+	background: none;
 }

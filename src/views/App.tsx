@@ -5,7 +5,7 @@ import Converter from "../components/Converter";
 import Logo from "../components/Logo";
 import css from "./App.module.scss";
 
-const Component = () => {
+const App = () => {
 	return (
 		<section className={css.component}>
 			<Logo />
@@ -33,4 +33,5 @@ const Component = () => {
 		</section>
 	);
 };
-export default Component;
+
+export default App;
