@@ -31,11 +31,13 @@ const ticker = selector({
 });
 export const exchangeRate = selectorFamily({
 	key: "exchangeRate",
-	get: (target: string) => ({ get }) => {
-		const { last } = get(ticker)[target] || {};
-		if (!last) {
-			throw new Error(`no such symbol: ${target}`);
-		}
-		return last;
-	},
+	get:
+		(target: string) =>
+		({ get }) => {
+			const { last } = get(ticker)[target] || {};
+			if (!last) {
+				throw new Error(`no such symbol: ${target}`);
+			}
+			return last;
+		},
 });
