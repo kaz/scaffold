@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { HashRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Clock from "../components/Clock";
 import Converter from "../components/Converter";
 import Logo from "../components/Logo";
@@ -9,7 +9,7 @@ const App = () => {
 	return (
 		<section className={css.component}>
 			<Logo />
-			<HashRouter>
+			<BrowserRouter>
 				<div className={css.block}>
 					<Clock />
 				</div>
@@ -29,7 +29,7 @@ const App = () => {
 						</Routes>
 					</Suspense>
 				</div>
-			</HashRouter>
+			</BrowserRouter>
 		</section>
 	);
 };
