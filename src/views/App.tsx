@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { HashRouter, Link, Route, Routes } from "react-router-dom";
 import Clock from "../components/Clock";
 import Converter from "../components/Converter";
@@ -22,12 +22,12 @@ const App = () => {
 					</Link>
 				</div>
 				<div className={css.block}>
-					<React.Suspense fallback="Loading ...">
+					<Suspense fallback="Loading ...">
 						<Routes>
 							<Route path="/usd" element={<Converter target="USD" />} />
 							<Route path="/jpy" element={<Converter target="JPY" />} />
 						</Routes>
-					</React.Suspense>
+					</Suspense>
 				</div>
 			</HashRouter>
 		</section>
