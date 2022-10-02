@@ -8,17 +8,20 @@ export default defineConfig({
 	plugins: [react(), splitVendorChunkPlugin()],
 	build: {
 		target: "es2015",
+		chunkSizeWarningLimit: 1024,
 		rollupOptions: {
 			output: {
-				assetFileNames: "assets/[hash].[ext]",
-				chunkFileNames: "src/[hash].js",
-				entryFileNames: "src/[hash].js",
+				assetFileNames: "[hash].[ext]",
+				chunkFileNames: "[hash].js",
+				entryFileNames: "[hash].js",
 			},
 		},
 	},
 	css: {
 		postcss: {
-			plugins: production ? [require("postcss-variable-compress")()] : undefined,
+			plugins: production
+				? [require("autoprefixer")(), require("postcss-gap-properties")(), require("postcss-variable-compress")()]
+				: undefined,
 		},
 		modules: {
 			generateScopedName: production ? "[md5:contenthash:base62:4]" : undefined,
