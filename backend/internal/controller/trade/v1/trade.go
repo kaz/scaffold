@@ -24,7 +24,7 @@ func NewTradeServiceHandler(usecase usecase.TradeUsecase) tradev1connect.TradeSe
 	}
 }
 
-func (h *tradeServiceHandler) GetSymbols(ctx context.Context, req *connect.Request[tradev1.GetSymbolsRequest]) (*connect.Response[tradev1.GetSymbolsResponse], error) {
+func (h *tradeServiceHandler) GetSymbols(ctx context.Context, _ *connect.Request[tradev1.GetSymbolsRequest]) (*connect.Response[tradev1.GetSymbolsResponse], error) {
 	symbols, err := h.usecase.GetSymbols(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get symbols: %w", err)
