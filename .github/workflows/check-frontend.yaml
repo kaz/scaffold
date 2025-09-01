@@ -1,0 +1,32 @@
+name: 🔍 Check frontend
+
+on:
+  push:
+    paths:
+      - frontend/**
+      - .github/workflows/check-frontend.yaml
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aquaproj/aqua-installer@v4.0.2
+        with:
+          aqua_version: v2.53.9
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+      - run: bun install --frozen-lockfile
+      - if: always()
+        run: bun run lint
+      - if: always()
+        run: bun run format
+      - if: always()
+        run: bun run typecheck
