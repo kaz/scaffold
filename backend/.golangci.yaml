@@ -1,0 +1,49 @@
+version: "2"
+run:
+  allow-parallel-runners: true
+linters:
+  default: all
+  disable:
+    - depguard
+    - godot
+    - ireturn
+    - lll
+    - mnd
+    - nlreturn
+    - noinlineerr
+    - varnamelen
+    - wsl
+    - wsl_v5
+  settings:
+    exhaustive:
+      check:
+        - switch
+        - map
+    exhaustruct:
+      include:
+        - github\.com/kaz/scaffold/backend/.+
+    grouper:
+      const-require-grouping: true
+      import-require-grouping: true
+      type-require-grouping: true
+      var-require-grouping: true
+    unconvert:
+      fast-math: true
+    unparam:
+      check-exported: true
+    unused:
+      field-writes-are-uses: false
+      post-statements-are-reads: false
+      exported-fields-are-used: false
+      local-variables-are-used: false
+      generated-is-used: false
+  exclusions:
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+formatters:
+  enable:
+    - gofmt
+    - goimports

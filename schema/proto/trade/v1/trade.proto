@@ -1,0 +1,15 @@
+edition = "2023";
+
+package trade.v1;
+
+service TradeService {
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse);
+}
+
+message GetPriceRequest {
+  string symbol = 1;
+}
+message GetPriceResponse {
+  double bid = 1;
+  double ask = 2;
+}

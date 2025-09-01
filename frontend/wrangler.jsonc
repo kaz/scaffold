@@ -1,0 +1,15 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"compatibility_date": "2025-08-15",
+	"main": "worker/index.ts",
+	"assets": {
+		"directory": "build/client",
+		"not_found_handling": "single-page-application",
+	},
+	"observability": {
+		"enabled": true,
+	},
+	"vars": {
+		"BACKEND_URL": "http://localhost:50051",
+	},
+}

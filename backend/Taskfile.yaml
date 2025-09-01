@@ -1,0 +1,29 @@
+version: "3"
+
+tasks:
+  mod:update:
+    cmds:
+      - rm -rf go.mod go.sum vendor
+      - go mod init github.com/kaz/scaffold/backend
+      - task: mod:tidy
+  mod:tidy:
+    cmds:
+      - go mod tidy
+      - task: mod:vendor
+  mod:vendor:
+    cmds:
+      - go mod vendor
+
+  gen:
+    cmds:
+      - go generate ./...
+
+  lint:
+    cmds:
+      - golangci-lint run
+
+  run:
+    cmds:
+      - go run . {{.CLI_ARGS}}
+    dotenv:
+      - .env

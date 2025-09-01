@@ -1,0 +1,17 @@
+version: v2
+clean: true
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/kaz/scaffold/backend/internal/gen/buf
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: ../backend/internal/gen/buf
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go
+    out: ../backend/internal/gen/buf
+    opt: paths=source_relative
+  - remote: buf.build/bufbuild/es
+    out: ./gen
+    opt: target=ts
