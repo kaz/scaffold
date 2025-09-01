@@ -1,15 +1,5 @@
-import { href, Link } from "react-router";
-
-const symbols = ["BTC", "ETH"];
+import { href, Navigate } from "react-router";
 
 export default function () {
-	return (
-		<>
-			{symbols.map(symbol => (
-				<Link key={symbol} to={href("/trade/:symbol", { symbol })}>
-					{symbol}
-				</Link>
-			))}
-		</>
-	);
+	return <Navigate to={href("/trade/:symbol", { symbol: "BTC" })} replace />;
 }

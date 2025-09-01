@@ -21,6 +21,86 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetSymbolsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSymbolsRequest) Reset() {
+	*x = GetSymbolsRequest{}
+	mi := &file_trade_v1_trade_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSymbolsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSymbolsRequest) ProtoMessage() {}
+
+func (x *GetSymbolsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_v1_trade_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSymbolsRequest.ProtoReflect.Descriptor instead.
+func (*GetSymbolsRequest) Descriptor() ([]byte, []int) {
+	return file_trade_v1_trade_proto_rawDescGZIP(), []int{0}
+}
+
+type GetSymbolsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Symbols       []string               `protobuf:"bytes,1,rep,name=symbols" json:"symbols,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSymbolsResponse) Reset() {
+	*x = GetSymbolsResponse{}
+	mi := &file_trade_v1_trade_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSymbolsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSymbolsResponse) ProtoMessage() {}
+
+func (x *GetSymbolsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_v1_trade_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSymbolsResponse.ProtoReflect.Descriptor instead.
+func (*GetSymbolsResponse) Descriptor() ([]byte, []int) {
+	return file_trade_v1_trade_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetSymbolsResponse) GetSymbols() []string {
+	if x != nil {
+		return x.Symbols
+	}
+	return nil
+}
+
 type GetPriceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Symbol        *string                `protobuf:"bytes,1,opt,name=symbol" json:"symbol,omitempty"`
@@ -30,7 +110,7 @@ type GetPriceRequest struct {
 
 func (x *GetPriceRequest) Reset() {
 	*x = GetPriceRequest{}
-	mi := &file_trade_v1_trade_proto_msgTypes[0]
+	mi := &file_trade_v1_trade_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +122,7 @@ func (x *GetPriceRequest) String() string {
 func (*GetPriceRequest) ProtoMessage() {}
 
 func (x *GetPriceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_trade_v1_trade_proto_msgTypes[0]
+	mi := &file_trade_v1_trade_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +135,7 @@ func (x *GetPriceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPriceRequest.ProtoReflect.Descriptor instead.
 func (*GetPriceRequest) Descriptor() ([]byte, []int) {
-	return file_trade_v1_trade_proto_rawDescGZIP(), []int{0}
+	return file_trade_v1_trade_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetPriceRequest) GetSymbol() string {
@@ -75,7 +155,7 @@ type GetPriceResponse struct {
 
 func (x *GetPriceResponse) Reset() {
 	*x = GetPriceResponse{}
-	mi := &file_trade_v1_trade_proto_msgTypes[1]
+	mi := &file_trade_v1_trade_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +167,7 @@ func (x *GetPriceResponse) String() string {
 func (*GetPriceResponse) ProtoMessage() {}
 
 func (x *GetPriceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_trade_v1_trade_proto_msgTypes[1]
+	mi := &file_trade_v1_trade_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +180,7 @@ func (x *GetPriceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPriceResponse.ProtoReflect.Descriptor instead.
 func (*GetPriceResponse) Descriptor() ([]byte, []int) {
-	return file_trade_v1_trade_proto_rawDescGZIP(), []int{1}
+	return file_trade_v1_trade_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetPriceResponse) GetBid() float64 {
@@ -121,14 +201,19 @@ var File_trade_v1_trade_proto protoreflect.FileDescriptor
 
 const file_trade_v1_trade_proto_rawDesc = "" +
 	"\n" +
-	"\x14trade/v1/trade.proto\x12\btrade.v1\")\n" +
+	"\x14trade/v1/trade.proto\x12\btrade.v1\"\x13\n" +
+	"\x11GetSymbolsRequest\".\n" +
+	"\x12GetSymbolsResponse\x12\x18\n" +
+	"\asymbols\x18\x01 \x03(\tR\asymbols\")\n" +
 	"\x0fGetPriceRequest\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\"6\n" +
 	"\x10GetPriceResponse\x12\x10\n" +
 	"\x03bid\x18\x01 \x01(\x01R\x03bid\x12\x10\n" +
-	"\x03ask\x18\x02 \x01(\x01R\x03ask2Q\n" +
-	"\fTradeService\x12A\n" +
-	"\bGetPrice\x12\x19.trade.v1.GetPriceRequest\x1a\x1a.trade.v1.GetPriceResponseB\x9e\x01\n" +
+	"\x03ask\x18\x02 \x01(\x01R\x03ask2\xa4\x01\n" +
+	"\fTradeService\x12L\n" +
+	"\n" +
+	"GetSymbols\x12\x1b.trade.v1.GetSymbolsRequest\x1a\x1c.trade.v1.GetSymbolsResponse\"\x03\x90\x02\x01\x12F\n" +
+	"\bGetPrice\x12\x19.trade.v1.GetPriceRequest\x1a\x1a.trade.v1.GetPriceResponse\"\x03\x90\x02\x01B\x9e\x01\n" +
 	"\fcom.trade.v1B\n" +
 	"TradeProtoP\x01ZAgithub.com/kaz/scaffold/backend/internal/gen/buf/trade/v1;tradev1\xa2\x02\x03TXX\xaa\x02\bTrade.V1\xca\x02\bTrade\\V1\xe2\x02\x14Trade\\V1\\GPBMetadata\xea\x02\tTrade::V1b\beditionsp\xe8\a"
 
@@ -144,16 +229,20 @@ func file_trade_v1_trade_proto_rawDescGZIP() []byte {
 	return file_trade_v1_trade_proto_rawDescData
 }
 
-var file_trade_v1_trade_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_trade_v1_trade_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_trade_v1_trade_proto_goTypes = []any{
-	(*GetPriceRequest)(nil),  // 0: trade.v1.GetPriceRequest
-	(*GetPriceResponse)(nil), // 1: trade.v1.GetPriceResponse
+	(*GetSymbolsRequest)(nil),  // 0: trade.v1.GetSymbolsRequest
+	(*GetSymbolsResponse)(nil), // 1: trade.v1.GetSymbolsResponse
+	(*GetPriceRequest)(nil),    // 2: trade.v1.GetPriceRequest
+	(*GetPriceResponse)(nil),   // 3: trade.v1.GetPriceResponse
 }
 var file_trade_v1_trade_proto_depIdxs = []int32{
-	0, // 0: trade.v1.TradeService.GetPrice:input_type -> trade.v1.GetPriceRequest
-	1, // 1: trade.v1.TradeService.GetPrice:output_type -> trade.v1.GetPriceResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: trade.v1.TradeService.GetSymbols:input_type -> trade.v1.GetSymbolsRequest
+	2, // 1: trade.v1.TradeService.GetPrice:input_type -> trade.v1.GetPriceRequest
+	1, // 2: trade.v1.TradeService.GetSymbols:output_type -> trade.v1.GetSymbolsResponse
+	3, // 3: trade.v1.TradeService.GetPrice:output_type -> trade.v1.GetPriceResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -170,7 +259,7 @@ func file_trade_v1_trade_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_v1_trade_proto_rawDesc), len(file_trade_v1_trade_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

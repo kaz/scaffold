@@ -8,6 +8,7 @@ import (
 
 type (
 	API interface {
-		GetPrice(ctx context.Context, symbol string) (domain.Price, error)
+		GetSymbols(ctx context.Context) ([]domain.Symbol, error)
+		GetPrice(ctx context.Context, symbol domain.Symbol) (domain.Price, error)
 	}
 )

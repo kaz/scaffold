@@ -33,12 +33,15 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// TradeServiceGetSymbolsProcedure is the fully-qualified name of the TradeService's GetSymbols RPC.
+	TradeServiceGetSymbolsProcedure = "/trade.v1.TradeService/GetSymbols"
 	// TradeServiceGetPriceProcedure is the fully-qualified name of the TradeService's GetPrice RPC.
 	TradeServiceGetPriceProcedure = "/trade.v1.TradeService/GetPrice"
 )
 
 // TradeServiceClient is a client for the trade.v1.TradeService service.
 type TradeServiceClient interface {
+	GetSymbols(context.Context, *connect.Request[v1.GetSymbolsRequest]) (*connect.Response[v1.GetSymbolsResponse], error)
 	GetPrice(context.Context, *connect.Request[v1.GetPriceRequest]) (*connect.Response[v1.GetPriceResponse], error)
 }
 
@@ -53,10 +56,18 @@ func NewTradeServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 	baseURL = strings.TrimRight(baseURL, "/")
 	tradeServiceMethods := v1.File_trade_v1_trade_proto.Services().ByName("TradeService").Methods()
 	return &tradeServiceClient{
+		getSymbols: connect.NewClient[v1.GetSymbolsRequest, v1.GetSymbolsResponse](
+			httpClient,
+			baseURL+TradeServiceGetSymbolsProcedure,
+			connect.WithSchema(tradeServiceMethods.ByName("GetSymbols")),
+			connect.WithIdempotency(connect.IdempotencyNoSideEffects),
+			connect.WithClientOptions(opts...),
+		),
 		getPrice: connect.NewClient[v1.GetPriceRequest, v1.GetPriceResponse](
 			httpClient,
 			baseURL+TradeServiceGetPriceProcedure,
 			connect.WithSchema(tradeServiceMethods.ByName("GetPrice")),
+			connect.WithIdempotency(connect.IdempotencyNoSideEffects),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -64,7 +75,13 @@ func NewTradeServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 
 // tradeServiceClient implements TradeServiceClient.
 type tradeServiceClient struct {
-	getPrice *connect.Client[v1.GetPriceRequest, v1.GetPriceResponse]
+	getSymbols *connect.Client[v1.GetSymbolsRequest, v1.GetSymbolsResponse]
+	getPrice   *connect.Client[v1.GetPriceRequest, v1.GetPriceResponse]
+}
+
+// GetSymbols calls trade.v1.TradeService.GetSymbols.
+func (c *tradeServiceClient) GetSymbols(ctx context.Context, req *connect.Request[v1.GetSymbolsRequest]) (*connect.Response[v1.GetSymbolsResponse], error) {
+	return c.getSymbols.CallUnary(ctx, req)
 }
 
 // GetPrice calls trade.v1.TradeService.GetPrice.
@@ -74,6 +91,7 @@ func (c *tradeServiceClient) GetPrice(ctx context.Context, req *connect.Request[
 
 // TradeServiceHandler is an implementation of the trade.v1.TradeService service.
 type TradeServiceHandler interface {
+	GetSymbols(context.Context, *connect.Request[v1.GetSymbolsRequest]) (*connect.Response[v1.GetSymbolsResponse], error)
 	GetPrice(context.Context, *connect.Request[v1.GetPriceRequest]) (*connect.Response[v1.GetPriceResponse], error)
 }
 
@@ -84,14 +102,24 @@ type TradeServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewTradeServiceHandler(svc TradeServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	tradeServiceMethods := v1.File_trade_v1_trade_proto.Services().ByName("TradeService").Methods()
+	tradeServiceGetSymbolsHandler := connect.NewUnaryHandler(
+		TradeServiceGetSymbolsProcedure,
+		svc.GetSymbols,
+		connect.WithSchema(tradeServiceMethods.ByName("GetSymbols")),
+		connect.WithIdempotency(connect.IdempotencyNoSideEffects),
+		connect.WithHandlerOptions(opts...),
+	)
 	tradeServiceGetPriceHandler := connect.NewUnaryHandler(
 		TradeServiceGetPriceProcedure,
 		svc.GetPrice,
 		connect.WithSchema(tradeServiceMethods.ByName("GetPrice")),
+		connect.WithIdempotency(connect.IdempotencyNoSideEffects),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/trade.v1.TradeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case TradeServiceGetSymbolsProcedure:
+			tradeServiceGetSymbolsHandler.ServeHTTP(w, r)
 		case TradeServiceGetPriceProcedure:
 			tradeServiceGetPriceHandler.ServeHTTP(w, r)
 		default:
@@ -102,6 +130,10 @@ func NewTradeServiceHandler(svc TradeServiceHandler, opts ...connect.HandlerOpti
 
 // UnimplementedTradeServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedTradeServiceHandler struct{}
+
+func (UnimplementedTradeServiceHandler) GetSymbols(context.Context, *connect.Request[v1.GetSymbolsRequest]) (*connect.Response[v1.GetSymbolsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("trade.v1.TradeService.GetSymbols is not implemented"))
+}
 
 func (UnimplementedTradeServiceHandler) GetPrice(context.Context, *connect.Request[v1.GetPriceRequest]) (*connect.Response[v1.GetPriceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("trade.v1.TradeService.GetPrice is not implemented"))

@@ -3,7 +3,17 @@ edition = "2023";
 package trade.v1;
 
 service TradeService {
-  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse);
+  rpc GetSymbols(GetSymbolsRequest) returns (GetSymbolsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+}
+
+message GetSymbolsRequest {}
+message GetSymbolsResponse {
+  repeated string symbols = 1;
 }
 
 message GetPriceRequest {

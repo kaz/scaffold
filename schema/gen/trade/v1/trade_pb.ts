@@ -10,7 +10,37 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file trade/v1/trade.proto.
  */
 export const file_trade_v1_trade: GenFile = /*@__PURE__*/
-  fileDesc("ChR0cmFkZS92MS90cmFkZS5wcm90bxIIdHJhZGUudjEiIQoPR2V0UHJpY2VSZXF1ZXN0Eg4KBnN5bWJvbBgBIAEoCSIsChBHZXRQcmljZVJlc3BvbnNlEgsKA2JpZBgBIAEoARILCgNhc2sYAiABKAEyUQoMVHJhZGVTZXJ2aWNlEkEKCEdldFByaWNlEhkudHJhZGUudjEuR2V0UHJpY2VSZXF1ZXN0GhoudHJhZGUudjEuR2V0UHJpY2VSZXNwb25zZUKeAQoMY29tLnRyYWRlLnYxQgpUcmFkZVByb3RvUAFaQWdpdGh1Yi5jb20va2F6L3NjYWZmb2xkL2JhY2tlbmQvaW50ZXJuYWwvZ2VuL2J1Zi90cmFkZS92MTt0cmFkZXYxogIDVFhYqgIIVHJhZGUuVjHKAghUcmFkZVxWMeICFFRyYWRlXFYxXEdQQk1ldGFkYXRh6gIJVHJhZGU6OlYxYghlZGl0aW9uc3DoBw");
+  fileDesc("ChR0cmFkZS92MS90cmFkZS5wcm90bxIIdHJhZGUudjEiEwoRR2V0U3ltYm9sc1JlcXVlc3QiJQoSR2V0U3ltYm9sc1Jlc3BvbnNlEg8KB3N5bWJvbHMYASADKAkiIQoPR2V0UHJpY2VSZXF1ZXN0Eg4KBnN5bWJvbBgBIAEoCSIsChBHZXRQcmljZVJlc3BvbnNlEgsKA2JpZBgBIAEoARILCgNhc2sYAiABKAEypAEKDFRyYWRlU2VydmljZRJMCgpHZXRTeW1ib2xzEhsudHJhZGUudjEuR2V0U3ltYm9sc1JlcXVlc3QaHC50cmFkZS52MS5HZXRTeW1ib2xzUmVzcG9uc2UiA5ACARJGCghHZXRQcmljZRIZLnRyYWRlLnYxLkdldFByaWNlUmVxdWVzdBoaLnRyYWRlLnYxLkdldFByaWNlUmVzcG9uc2UiA5ACAUKeAQoMY29tLnRyYWRlLnYxQgpUcmFkZVByb3RvUAFaQWdpdGh1Yi5jb20va2F6L3NjYWZmb2xkL2JhY2tlbmQvaW50ZXJuYWwvZ2VuL2J1Zi90cmFkZS92MTt0cmFkZXYxogIDVFhYqgIIVHJhZGUuVjHKAghUcmFkZVxWMeICFFRyYWRlXFYxXEdQQk1ldGFkYXRh6gIJVHJhZGU6OlYxYghlZGl0aW9uc3DoBw");
+
+/**
+ * @generated from message trade.v1.GetSymbolsRequest
+ */
+export type GetSymbolsRequest = Message<"trade.v1.GetSymbolsRequest"> & {
+};
+
+/**
+ * Describes the message trade.v1.GetSymbolsRequest.
+ * Use `create(GetSymbolsRequestSchema)` to create a new message.
+ */
+export const GetSymbolsRequestSchema: GenMessage<GetSymbolsRequest> = /*@__PURE__*/
+  messageDesc(file_trade_v1_trade, 0);
+
+/**
+ * @generated from message trade.v1.GetSymbolsResponse
+ */
+export type GetSymbolsResponse = Message<"trade.v1.GetSymbolsResponse"> & {
+  /**
+   * @generated from field: repeated string symbols = 1;
+   */
+  symbols: string[];
+};
+
+/**
+ * Describes the message trade.v1.GetSymbolsResponse.
+ * Use `create(GetSymbolsResponseSchema)` to create a new message.
+ */
+export const GetSymbolsResponseSchema: GenMessage<GetSymbolsResponse> = /*@__PURE__*/
+  messageDesc(file_trade_v1_trade, 1);
 
 /**
  * @generated from message trade.v1.GetPriceRequest
@@ -27,7 +57,7 @@ export type GetPriceRequest = Message<"trade.v1.GetPriceRequest"> & {
  * Use `create(GetPriceRequestSchema)` to create a new message.
  */
 export const GetPriceRequestSchema: GenMessage<GetPriceRequest> = /*@__PURE__*/
-  messageDesc(file_trade_v1_trade, 0);
+  messageDesc(file_trade_v1_trade, 2);
 
 /**
  * @generated from message trade.v1.GetPriceResponse
@@ -49,12 +79,20 @@ export type GetPriceResponse = Message<"trade.v1.GetPriceResponse"> & {
  * Use `create(GetPriceResponseSchema)` to create a new message.
  */
 export const GetPriceResponseSchema: GenMessage<GetPriceResponse> = /*@__PURE__*/
-  messageDesc(file_trade_v1_trade, 1);
+  messageDesc(file_trade_v1_trade, 3);
 
 /**
  * @generated from service trade.v1.TradeService
  */
 export const TradeService: GenService<{
+  /**
+   * @generated from rpc trade.v1.TradeService.GetSymbols
+   */
+  getSymbols: {
+    methodKind: "unary";
+    input: typeof GetSymbolsRequestSchema;
+    output: typeof GetSymbolsResponseSchema;
+  },
   /**
    * @generated from rpc trade.v1.TradeService.GetPrice
    */
