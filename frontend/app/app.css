@@ -2,5 +2,5 @@
 
 html,
 body {
-	font-family: ui-sans-serif, system-ui, sans-serif;
+	@apply font-sans;
 }
