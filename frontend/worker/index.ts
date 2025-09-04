@@ -1,9 +1,11 @@
+import { apiPattern } from "./api";
+
+const apiRegExp = new RegExp(apiPattern);
+
 export default {
 	fetch(request, env) {
-		const isAPIPath = new RegExp("^/trade\\.v1\\.TradeService/");
-
 		const url = new URL(request.url);
-		if (isAPIPath.test(url.pathname)) {
+		if (apiRegExp.test(url.pathname)) {
 			const req = new Request(new URL(`${url.pathname}${url.search}`, env.BACKEND_URL), request);
 			return fetch(req);
 		}

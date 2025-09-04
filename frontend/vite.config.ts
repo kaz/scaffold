@@ -2,6 +2,7 @@ import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { apiPattern } from "./worker/api";
 
 export default defineConfig({
 	plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
@@ -16,7 +17,7 @@ export default defineConfig({
 	},
 	server: {
 		proxy: {
-			"^/trade\\.v1\\.TradeService/": {
+			[apiPattern]: {
 				target: "http://localhost:50051",
 			},
 		},
